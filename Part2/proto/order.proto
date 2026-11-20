@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package order;
+option go_package="example.com/ordertracking/proto;orderpb";
+
+service OrderService {
+  rpc GetOrder (OrderRequest) returns (OrderReply);
+  rpc TrackOrder (OrderRequest) returns (stream OrderUpdate);
+}
+message OrderRequest {
+  string order_id=1;
+}
+message OrderReply {
+  string order_id=1;
+  string product=2;
+  string status=3;
+}
+message OrderUpdate {
+  string order_id=1;
+  string status=2;
+}
